@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+
 export class Form extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     name: '',
     number: '',
@@ -23,9 +29,21 @@ export class Form extends Component {
 
   render() {
     return (
-      <form onSubmit={this.hendleSubmit}>
+      <form
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+        }}
+        onSubmit={this.hendleSubmit}
+      >
         <label>
+          Name
           <input
+            style={{
+              display: 'block',
+              margin: '5px 0 10px',
+            }}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -36,7 +54,12 @@ export class Form extends Component {
           />
         </label>
         <label>
+          Number
           <input
+            style={{
+              display: 'block',
+              margin: '5px 0 20px',
+            }}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

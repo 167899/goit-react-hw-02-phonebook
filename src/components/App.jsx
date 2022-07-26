@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form } from './Form/Form';
 import { Filter } from './Filter/Filter';
-import { Contacts } from './Contacts/Contacts';
+import { ContactsList } from './ContactsList/ContactsList';
 
 export class App extends Component {
   state = {
@@ -39,9 +39,21 @@ export class App extends Component {
     this.setState({ filter: '' });
   };
 
-  delContact = () => {
-    
-  }
+  delContact = e => {
+    console.log('targetId:', e.target.parentElement.id);
+
+    this.setState(prevState => {
+      const delContacts = prevState.contacts.filter(
+        contact => contact.id !== e.target.parentElement.id && contact.id
+      );
+
+      console.log(delContacts);
+
+      return {
+        contacts: delContacts,
+      };
+    });
+  };
 
   render() {
     const newContacts = this.state.contacts.filter(contact =>
@@ -52,7 +64,8 @@ export class App extends Component {
       <div
         style={{
           height: '100vh',
-          fontSize: 40,
+          marginLeft: '40px',
+          fontSize: 20,
           color: '#010101',
         }}
       >
@@ -61,7 +74,7 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter filterProp={this.filterState} value={this.state.filter} />
-        <Contacts contacts={newContacts} />
+        <ContactsList contacts={newContacts} del={this.delContact} />
       </div>
     );
   }
