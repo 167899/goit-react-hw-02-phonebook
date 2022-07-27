@@ -14,7 +14,7 @@ export const Contact = ({ name, number, id, del }) => {
         id={id}
       >
         {name}: {number}
-        <button type="click" onClick={del}>
+        <button type="button" onClick={del}>
           Delite
         </button>
       </li>

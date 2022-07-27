@@ -15,7 +15,7 @@ export class App extends Component {
   };
 
   formSubmitState = data => {
-    if (!this.state.contacts.find(e => e.name === data.name)) {
+    if (!this.state.contacts.find(e => e.name.toLowerCase() === data.name.toLowerCase())) {
       this.resetFilter();
       this.setState(prevState => {
         return {
